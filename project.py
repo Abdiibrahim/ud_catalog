@@ -115,7 +115,7 @@ def gconnect():
 	output += '<img src="'
 	output += login_session['picture']
 	output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-	flash("you are now logged in as %s" % login_session['username'])
+	flash("You are now logged in as %s" % login_session['username'])
 	return output
 
 
@@ -157,6 +157,11 @@ def fbconnect():
 '''
 @app.route('/fbdisconnect')
 def fbdisconnect():
+'''
+'''
+# Disconnect based on provider
+@app.route('/disconnect')
+def disconnect():
 '''
 
 # Show all categories
@@ -217,6 +222,103 @@ def deleteCategory(category_id):
 		return redirect(url_for('showCategories', category_id=category_id))
 	else:
 		return render_template('deleteCategory.html', category=categoryToDelete)
+
+
+# Show list items
+@app.route('/category/<int:category_id>/')
+@app.route('/category/<int:category_id>/list/')
+def showList(category_id):
+	category = session.query(Category).filter_by(id=category_id).one()
+	creator = getUserInfo(category.user_id)
+	items = session.query(Item).filter_by(category_id=category_id).all()
+	if 'username' not in login_session or creator.id != login_session['user_id']:
+		return render_template('publiclist.html', items=items, category=category, creator=creator)
+	else:
+		return render_template('list.html', items=items, category=category, creator=creator)
+
+
+# Create new list item
+@app.route('/category/<int:category_id>/list/new')
+def newListItem(category_id):
+	if 'username' not in login_session:
+		return redirect('/login')
+	category = session.query(Category).filter_by(id=category_id).one()
+	if login_session['user_id'] != category.user_id:
+		return "<script>function myFunction() {alert('You are not authorized to add list items to this category. Please create your own category in order to add items.');}</script><body onload='myFunction()''>"
+	if request.method == 'POST':
+		newItem = Item(name=request.form['name'], description=request.form['description'], price=request.form['price'], type=request.form['type'],category_id=category_id, user_id=login_session['user_id'])
+		session.add(newItem)
+		session.commit()
+		flash('New List %s Item Successfully Created' % newItem.name)
+		return redirect(url_for('showList', category_id=category_id))
+	else:
+		return render_template('newlistitem.html', category_id=category_id)
+
+
+# Edit a list item
+@app.route('/category/<int:category_id>/list/<int:list_id>/edit', methods=['GET', 'POST'])
+def editListItem(category_id, list_id):
+	if 'username' not in login_session:
+		return redirect('/login')
+	editedItem = session.query(Item).filter_by(id=list_id).one()
+	restaurant = session.query(Category).filter_by(id=category_id).one()
+	if login_session['user_id'] != category.user_id:
+		return "<script>function myFunction() {alert('You are not authorized to edit list items to this category. Please create your own category in order to edit items.');}</script><body onload='myFunction()''>"
+	if request.method == 'POST':
+		if request.form['name']:
+			editedItem.name = request.form['name']
+		if request.form['description']:
+			editedItem.description = request.form['description']
+		if request.form['price']:
+			editedItem.price = request.form['price']
+		if request.form['type']:
+			editedItem.course = request.form['type']
+		session.add(editedItem)
+		session.commit()
+		flash('List Item Successfully Edited')
+		return redirect(url_for('showList', category_id=category_id))
+	else:
+		return render_template('editlistitem.html', category_id=category_id, list_id=list_id, item=editedItem)
+
+
+# Delete a list item
+@app.route('/category/<int:category_id>/list/<int:list_id>/delete', methods = ['GET','POST'])
+def deleteListItem(category_id, list_id):
+	if 'username' not in login_session:
+		return redirect('/login')
+	category = session.query(Category).filter_by(id=category_id).one()
+	itemToDelete = session.query(Item).filter_by(id=list_id).one()
+	if login_session['user_id'] != category.user_id:
+		return "<script>function myFunction() {alert('You are not authorized to delete list items to this category. Please create your own category in order to delete items.');}</script><body onload='myFunction()''>"
+	if request.method == 'POST':
+		session.delete(itemToDelete)
+		session.commit()
+		flash('List Item Successfully Deleted')
+		return redirect(url_for('showList', category_id=category_id))
+	else:
+		return render_template('deletelistitem.html', item=itemToDelete)
+
+
+# User helper functions
+def createUser(login_session):
+	newUser = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+	session.add(newUser)
+	session.commit()
+	user = session.query(User).filter_by(email=login_session['email']).one()
+	return user.id
+
+
+def getUserInfo(user_id):
+	user = session.query(User).filter_by(id=user_id).one()
+	return user
+
+
+def getUserID(email):
+	try:
+		user = session.query(User).filter_by(email=email).one()
+		return user.id
+	except:
+		return None
 
 
 if __name__ == '__main__':
