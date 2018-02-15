@@ -9,7 +9,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Create dummy user
-User1 = User(id=1 , name="Sydney Adams", email="sydneyadams@email.com", picture='https://conferencecloud-assets.s3.amazonaws.com/default_avatar.png')
+User1 = User(id=1 , name="Sydney Adams", email="sydneyadams@example.com", picture='https://conferencecloud-assets.s3.amazonaws.com/default_avatar.png')
 session.add(User1)
 session.commit()
 
