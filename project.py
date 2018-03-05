@@ -254,7 +254,7 @@ def showList(category_id):
 
 
 # Create new list item
-@app.route('/category/<int:category_id>/list/new')
+@app.route('/category/<int:category_id>/list/new', methods=['GET', 'POST'])
 def newListItem(category_id):
 	if 'username' not in login_session:
 		return redirect('/login')
@@ -278,7 +278,7 @@ def editListItem(category_id, list_id):
 		return redirect('/login')
 	editedItem = session.query(Item).filter_by(id=list_id).one()
 	restaurant = session.query(Category).filter_by(id=category_id).one()
-	if login_session['user_id'] != category.user_id:
+	if login_session['user_id'] != editedItem.user_id:
 		return "<script>function myFunction() {alert('You are not authorized to edit list items to this category. Please create your own category in order to edit items.');}</script><body onload='myFunction()''>"
 	if request.method == 'POST':
 		if request.form['name']:

@@ -6,40 +6,40 @@
 h1 {
 	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
 	font-size: 50px;
-	color: #514353B;
+	color: #707CA0;
 	line-height: 60px;
 	font-weight: 300;
 }
 
 h2 {
 	font-size: 24px;
-	color: #42C3C9;
+	color: #41CB6D;
 	line-height: 29px;
 }
 
 h3 {
 	font-size: 18px;
-	color: #4A4A4A;
+	color: #28463E;
 	line-height: 23px;
 }
 
 p {
 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
  	font-size: 16px;
- 	color: #7B7573;
+ 	color: #333333;
  	line-height: 24px;
  	font-weight: 400;
 }
 
 strong {
 	font-size: 16px;
- 	color: #7B7573;
+ 	color: #333333;
  	line-height: 24px;
 }
 
 a {
 	font-size: 14px;
- 	color: #0093B9;
+ 	color: #42AEFF;
  	line-height: 17px;
 }
 
@@ -62,22 +62,22 @@ a {
 .btn {
 	padding: 20px;
 	margin: 0;
-	border-color: #9FB80A;
+	border-color: #1085B1;
 	border-width: 2px;
-	color: #9FB80A;
+	color: #1085B1;
 }
 
 .btn:hover {
-	border-color: #9FB80A;
+	border-color: #1085B1;
 }
 
 .btn.delete {
-	border-color: #AAAAAA;
-	color: #AAAAAA;
+	border-color: #A599A8;
+	color: #A599A8;
 }
 
 .btn.delete:hover {
-	border-color: #AAAAAA;
+	border-color: #A599A8;
 	color: red;
 }
 
@@ -99,7 +99,7 @@ a {
 	margin-bottom: 0;
 	line-height: 16px;
 	font-size: 16px;
-	color: #7B7573;
+	color: #333333;
 	font-weight: 400;
 }
 
@@ -108,11 +108,11 @@ a {
 }
 
 .divider.blue {
-	background-color: #42C3C9;
+	background-color: #4A77C1;
 }
 
 .divider.green {
-	background-color: #9FB80A;
+	background-color: #0AB824;
 }
 
 .banner.main {
@@ -125,12 +125,12 @@ a {
 
 .banner.list {
 	height: 150px;
-	background-color: #E1E17F;
+	background-color: #B8E180;
 }
 
 .banner.profile {
 	height: 150px;
-	background-color: #A6E8EB;
+	background-color: #E8575A;
 }
 
 .banner h1 {
@@ -138,12 +138,12 @@ a {
 }
 
 .category-list {
-	background-color: #F0F0F0;
+	background-color: #8D8D8D;
  	padding: 20px;
 }
 
 .category-list:hover {
-	background-color: #E1E17F;
+	background-color: #B8E180;
  	padding: 20px;
 }
 
@@ -172,7 +172,7 @@ a {
 
 .creator figcaption {
 	font-size: 14px;
-	color: #7B7573;
+	color: #333333;
 	font-weight: 400;
 	margin-top: -20px;
 }

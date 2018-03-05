@@ -60,11 +60,11 @@
 							<h3>{{i.name}}</h3>
 							<p>{{i.description}}</p>
 							<p class="list-price">{{i.price}}</p>
-							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> | 
-							<a href="{{url_for('deleteListItem' category_id=category.id, list_id=i.id)}}">Delete</a>
+							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> |
+							<a href="{{url_for('deleteListItem', category_id=category.id, list_id=i.id)}}">Delete</a>
 						</div>
 					{% endif %}
-				{% endofor %}
+				{% endfor %}
 			</div>
 			<div class="col-md-4">
 				<h2>Pants</h2>
@@ -74,7 +74,7 @@
 							<h3>{{i.name}}</h3>
 							<p>{{i.description}}</p>
 							<p class="list-price">{{i.price}}</p>
-							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> | 
+							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> |
 							<a href="{{url_for('deleteListItem', category_id=category.id, list_id=i.id)}}">Delete</a>
 						</div>
 					{% endif %}
@@ -88,7 +88,7 @@
 							<h3>{{i.name}}</h3>
 							<p>{{i.description}}</p>
 							<p class="list-price">{{i.price}}</p>
-							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> | 
+							<a href="{{url_for('editListItem', category_id=category.id, list_id=i.id)}}">Edit</a> |
 							<a href="{{url_for('deleteListItem', category_id=category.id, list_id=i.id)}}">Delete</a>
 						</div>
 					{% endif %}
