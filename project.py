@@ -363,6 +363,7 @@ def categoryJSON():
 	return jsonify(categories=[r.serialize for r in categories])
 
 
+# Initialize on port 5000
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
 	app.debug = True
