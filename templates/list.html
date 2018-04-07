@@ -54,7 +54,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-3">
 				<h2>Shirts</h2>
-				{% for i in item %}
+				{% for i in items %}
 					{% if i.type == 'Shirts' %}
 						<div class="list-item">
 							<h3>{{i.name}}</h3>
@@ -68,7 +68,7 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Pants</h2>
-				{% for i in item %}
+				{% for i in items %}
 					{% if i.type == 'Pants' %}
 						<div class="list-item">
 							<h3>{{i.name}}</h3>
