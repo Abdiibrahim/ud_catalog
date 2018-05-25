@@ -37,8 +37,8 @@ class Category(Base):
 class Item(Base):
 	__tablename__ = 'item'
 
-	name = Column(String(250), nullable=False)
 	id = Column(Integer, primary_key=True)
+	name = Column(String(250), nullable=False)
 	description = Column(String(250))
 	price = Column(String(8))
 	type = Column(String(250))
@@ -53,6 +53,8 @@ class Item(Base):
 			'name'        : self.name,
 			'description' : self.description,
 			'id'          : self.id,
+			'user_id'     : self.user_id,
+			'category-id' : self.categpry_id,
 			'price'       : self.price,
 			'type'        : self.type
 		}
