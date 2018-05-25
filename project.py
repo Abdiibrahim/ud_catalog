@@ -1,28 +1,26 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
-from flask import flash
+from flask import flash, make_response
+from flask import session as login_session
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, Item, User
-from flask import session as login_session
-import random
-import string
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
+import random
+import string
 import httplib2
 import json
-from flask import make_response
 import requests
 
 app = Flask(__name__)
 
 CLIENT_ID = json.loads(
 	open('client_secrets.json', 'r').read())['web']['client_id']
-APPLICATION_NAME = "Catalog App"
 
 
 # Connect to database and create database session
-engine = create_engine('sqlite:///itemcatalog.db')
-Base.metadata.bind = engine
+engine = create_engine('sqlite:///itemcatalog.db',
+		       connect_args={'check_same_thread': False})
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -83,7 +81,7 @@ def gconnect():
 	if result['issued_to'] != CLIENT_ID:
 		response = make_response(
 			json.dumps("Token's client ID does not match app's."), 401)
-		print "Token's client ID does not match app's."
+		print("Token's client ID does not match app's.")
 		response.headers['Content-Type'] = 'application/json'
 		return response
 
@@ -125,7 +123,7 @@ def gconnect():
 	output += ' " style = "width: 300px; height: 300px;border-radius: 150px;\
 		-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
 	flash("you are now logged in as %s" % login_session['username'])
-	print "done!"
+	print("done!")
 	return output
 
 
@@ -366,5 +364,4 @@ def categoryJSON():
 # Initialize on port 5000
 if __name__ == '__main__':
 	app.secret_key = 'super_secret_key'
-	app.debug = True
-	app.run(host='0.0.0.0', port=5000)
+	app.run(host='0.0.0.0', port=5000, debug=True)
