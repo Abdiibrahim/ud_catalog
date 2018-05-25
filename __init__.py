@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import flash, make_response
 from flask import session as login_session
@@ -19,7 +21,7 @@ CLIENT_ID = json.loads(
 
 
 # Connect to database and create database session
-engine = create_engine('sqlite:///itemcatalog.db',
+engine = create_engine('postgesql://catalog:password@localhost/catalog',
 		       connect_args={'check_same_thread': False})
 
 DBSession = sessionmaker(bind=engine)
