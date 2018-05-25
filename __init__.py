@@ -21,8 +21,7 @@ CLIENT_ID = json.loads(
 
 
 # Connect to database and create database session
-engine = create_engine('postgesql://catalog:password@localhost/catalog',
-		       connect_args={'check_same_thread': False})
+engine = create_engine('postgesql://catalog:password@localhost/catalog')
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
