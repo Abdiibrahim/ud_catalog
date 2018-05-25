@@ -13,11 +13,12 @@ import string
 import httplib2
 import json
 import requests
+import os
 
 app = Flask(__name__)
-
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 CLIENT_ID = json.loads(
-	open('client_secrets.json', 'r').read())['web']['client_id']
+	open(APP_ROOT + '/client_secrets.json', 'r').read())['web']['client_id']
 
 
 # Connect to database and create database session
