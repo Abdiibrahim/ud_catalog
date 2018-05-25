@@ -1,8 +1,10 @@
+#!/usr/bin/python3
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, Item, User
 
-engine = create_engine('sqlite:///itemcatalog.db'
+engine = create_engine('postgresql://catalog:password@localhost/catalog',
                        connect_args={'check_same_thread': False})
 
 Base.metadata.bind = engine
